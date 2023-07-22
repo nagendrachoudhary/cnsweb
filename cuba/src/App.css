@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -35,4 +36,59 @@
   to {
     transform: rotate(360deg);
   }
+}
+@keyframes moveLeftRight {
+  0% {
+    transform: translateX(0)
+  }
+  50% {
+    transform: translate(-3px)
+  }
+  
+  100% {
+    transform: translateX(0)
+  }
+}
+.box{
+  width: 40%;
+  max-width: 400PX;
+  background:linear-gradient(103.75deg, #33B1EE -13.9%, #7366ff);
+  display: flex;
+  border-radius: 15px;
+}
+#whatbutton:hover{
+background-color: white;
+color:#33B1EE;
+
+}
+#whatbutton{
+  color: white;
+  background-color: transparent;
+}
+#fring{
+  width: 250px;
+  height: 250px;
+  background:linear-gradient(103.75deg, #00a9fe -13.9%, #fefefe);
+  border-radius: 100%;
+}
+#fring:hover{
+  background:linear-gradient(103.75deg, #00324c -13.9%, #8a8af9);
+}
+#sring{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center ;
+  width: 200px;
+  height: 200px;
+  background:white;
+  border-radius: 100%;
+  position: absolute;
+}
+#Navbar{
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: auto;
+  background-color: white;
 }

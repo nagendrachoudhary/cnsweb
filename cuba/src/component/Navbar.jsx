@@ -1,226 +1,125 @@
-import { Avatar, Box, Image, Input, Select, Text } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
-import { SearchIcon, CloseIcon, StarIcon, EditIcon, SettingsIcon } from "@chakra-ui/icons";
-import { AiFillDatabase, AiOutlineDown } from "react-icons/ai";
-import { BiBulb, BiLogIn, BiTask } from "react-icons/bi";
-import { BsInbox, BsMinecartLoaded } from "react-icons/bs";
-import { MdAccountBalance, MdAccountBox, MdNotificationsActive } from "react-icons/md";
-export default function Navbar() {
-  const [state, setState] = useState(0);
-  const [Search, setSearch] = useState(false);
-  const [Admin, setAdmin] = useState(false);
-  const [isHoveringSearchIcon, setIsHoveringSearchIcon] = useState(false);
-  const [isHoveringStarIcon, setIsHoveringStarIcon] = useState(false); // New state variable for the StarIcon hover
+import { Navbar, Group, Code, ScrollArea, createStyles, rem, Box } from '@mantine/core';
+import {
+  IconNotes,
+  IconCalendarStats,
+  IconGauge,
+  IconPresentationAnalytics,
+  IconFileAnalytics,
+  IconAdjustments,
+  IconLock,
+} from '@tabler/icons-react';
+import { UserButton } from './UserButton';
+import { LinksGroup } from './LinksGroup';
+import { ImCross } from 'react-icons/im';
 
-  const arr = [
-    "Don't Miss Out! ",
-    "Something you love is now on sale!",
-    "Our new update has been released.",
-  ];
+const mockdata = [
+    { label: 'Dashboard', icon: IconGauge,  initiallyOpened: true,
+      links: [
+        { label: 'Default', link: '/' },
+        { label: 'Ecommerce', link: '/' },
+        { label: 'Online Course', link: '/' },
+        { label: 'Crypto', link: '/' },
+        { label: 'Social', link: '/' },
+        { label: 'NFT', link: '/' },
+        { label: 'School Management', link: '/' },
+        { label: 'POS', link: '/' },
+      ],},
+    {
+      label: 'Widgets',
+      icon: IconNotes,
+      initiallyOpened: true,
+      links: [
+        { label: 'General', link: '/' },
+        { label: 'Chart', link: '/' },
+        
+      ],
+     
+    },
+  {
+    label: 'Page Layout',
+    icon: IconCalendarStats,
+    links: [
+      { label: 'Boxed', link: '/' },
+      { label: 'RTL', link: '/' },
+      { label: 'Dark Layout', link: '/' },
+    ],
+  },
+  { label: 'Project', icon: IconPresentationAnalytics },
+  { label: 'Contracts', icon: IconFileAnalytics },
+  { label: 'Settings', icon: IconAdjustments },
+  {
+    label: 'Security',
+    icon: IconLock,
+    links: [
+      { label: 'Enable 2FA', link: '/' },
+      { label: 'Change password', link: '/' },
+      { label: 'Recovery codes', link: '/' },
+    ],
+  },
+];
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setState((prevState) => (prevState + 1) % arr.length);
-    }, 1500);
+const useStyles = createStyles((theme) => ({
+  navbar: {
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+    paddingBottom: 0,
+  },
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  header: {
+    padding: theme.spacing.md,
+    paddingTop: 0,
+    marginLeft: `calc(${theme.spacing.md} * -1)`,
+    marginRight: `calc(${theme.spacing.md} * -1)`,
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    borderBottom: `${rem(1)} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
+  },
 
-  const toggleSearchBox = () => {
-    setSearch(!Search);
-  };
+  links: {
+    marginLeft: `calc(${theme.spacing.md} * -1)`,
+    marginRight: `calc(${theme.spacing.md} * -1)`,
+  },
 
-  const handleSearchIconHover = () => {
-    setIsHoveringSearchIcon(!isHoveringSearchIcon);
-  };
+  linksInner: {
+    paddingTop: theme.spacing.xl,
+    paddingBottom: theme.spacing.xl,
+  },
 
-  const handleStarIconHover = () => {
-    setIsHoveringStarIcon(!isHoveringStarIcon);
-  };
+  footer: {
+    marginLeft: `calc(${theme.spacing.md} * -1)`,
+    marginRight: `calc(${theme.spacing.md} * -1)`,
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+    }`,
+  },
+}));
 
+export function NavbarNested({show,addshow}) {
+  const { classes } = useStyles();
+  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  console.log(classes.navbar);
   return (
-    <>
-   
-      <style>
-        {`
-          @keyframes zoomIn {
-            from {
-              transform: scale(0);
-            }
-            to {
-              transform: scale(1);
-            }
-          }
-        `}
-      </style>
-      {Search ? (
-        <Box
-          style={{
-            height: "50px",
-            overflow: "hidden",
-            animation: "zoomIn 0.5s ease-in-out",
-            transition: "height 0.3s ease",
-          }}
-          backgroundColor={'gray.300'}
-          zIndex={999}
-          position="sticky"
-          top="0"
-          boxShadow={"base"}
-          display={"flex"}
-          left="0"
-          justifyContent={"center"}
-          alignItems={"center"}>
-             <Text>
-      Cuba
-    </Text>
-          <Input width={"70vw"} placeholder="Type your search here" />
-          <CloseIcon onClick={toggleSearchBox} boxSize={"20px"} />
-        </Box>
-      ) : (
-        <Box
-        zIndex={999}
-        backgroundColor={'gray.300'}
-          position="sticky"
-          top="0"
-          display={"flex"}
-          justifyContent={"space-between"}
-          boxShadow={"base"}
-          left="0">
-          <Box
-            width="30%"
-            justifyContent="flex-start"
-            display="flex"
-            alignItems="center">
-               <Text mr={'50px'}>
-      Cuba
-    </Text>
-            <Image
-              src="https://admin.pixelstrap.com/cuba/assets/images/giftools.gif"
-              alt="logo"
-            />
-            <Text>{arr[state]}</Text>
-          </Box>
-          <Box
-            display={"flex"}
-            gap={"30px"}
-            alignItems={"center"}
-            position="relative">
-            <Select width={"100px"} variant={"unstyled"} transform={"auto-gpu"}>
-              <option value="">English</option>
-              <option value="">Français</option>
-              <option value="">Español</option>
-              <option value="">Deutsch</option>
-              <option value="">Italiano</option>
-              <option value="">日本語</option>
-              <option value="">한국어</option>
-              <option value="">中文</option>
-              <option value="">Português Brasileiro</option>
-            </Select>
-            <SearchIcon onClick={toggleSearchBox} boxSize={"20px"} />
-            <Box
-              onMouseEnter={handleStarIconHover}
-              onMouseLeave={handleStarIconHover}>
-              <StarIcon />
-              {isHoveringStarIcon && (
-                <Box
-                  position="absolute"
-                  top="50%"
-                  translateY={"30px"}
-                  width={"400px"}
-                  transform="translateX(-50%)"
-                  backgroundColor="white"
-                  boxShadow="md"
-                  padding="10px"
-                  transition={"10s"}
-                  height={"300px"}
-                  shadow={"base"}>
-                  <Box shadow={"base"}>
-                    <Text fontSize={"2xl"}>BookMark</Text>
-                  </Box>
-                  <Box
-                    height={"100%"}
-                    display={"flex"}
-                    justifyContent={"space-evenly"}
-                    alignItems={"center"}>
-                    <Box cursor={"pointer"}>
-                      <EditIcon boxSize={"10"} />
-                      <Text>Forms</Text>
-                    </Box>
-                    <Box cursor={"pointer"}>
-                      <Avatar />
-                      <Text>Profile</Text>
-                    </Box>
-                    <Box cursor={"pointer"}>
-                      <AiFillDatabase size={"50px"} />
-                      <Text>Tables</Text>
-                    </Box>
-                  </Box>
-                  <Text _activeLink={true} cursor={"pointer"}>
-                    Add New Bookmark
-                  </Text>
-                </Box>
-              )}
-            </Box>
-            <Box>
-              <BiBulb size={"30px"} />
-            </Box>
-            <Box>
-              <BsMinecartLoaded size={"30px"} />
-            </Box>
-            <Box>
-              <MdNotificationsActive size={"30px"} />
-            </Box>
-            <Box>
-              <Image src="https://admin.pixelstrap.com/cuba/assets/images/dashboard/profile.png" />
-            </Box>
-            <Box width={"300px"} ml={"0"}>
-              <Text fontWeight={"bold"}>Emay Walter</Text>
-              <Box
-                onMouseEnter={() => {
-                  setAdmin(true);
-                }}
-                onMouseLeave={() => {
-                  setAdmin(false);
-                }}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}>
-                <Text>Admin </Text>
-                <AiOutlineDown />
-              </Box>
-            </Box>
-            {Admin && (
-              <Box
-                onMouseEnter={() => {
-                  setAdmin(true);
-                }}
-                onMouseLeave={() => {
-                  setAdmin(false);
-                }}
-                position="absolute"
-                top="50%"
-                right={0}
-                translateY={"30px"}
-                width={"200px"}
-                transform="translateX(-50%)"
-                backgroundColor="white"
-                boxShadow="md"
-                padding="10px"
-                transition={"10s"}
-                height={"300px"}
-                shadow={"base"}>
-                <Text textAlign={'left'} display={'flex'} alignItems={'center'} gap={'10px'} cursor={'pointer'}> <MdAccountBox/>ACCOUNT</Text>
-                <Text textAlign={'left'} display={'flex'} alignItems={'center'} gap={'10px'} cursor={'pointer'}><BsInbox/>INBOX</Text>
-                <Text textAlign={'left'} display={'flex'} alignItems={'center'} gap={'10px'} cursor={'pointer'}><BiTask/>TASKBOARD</Text>
-                <Text textAlign={'left'} display={'flex'} alignItems={'center'} gap={'10px'} cursor={'pointer'}><SettingsIcon/>SETTINGS</Text>
-                <Text textAlign={'left'} display={'flex'} alignItems={'center'} gap={'10px'} cursor={'pointer'}><BiLogIn/>LOG IN</Text>
-              </Box>
-            )}
-          </Box>
-        </Box>
-      )}
-    </>
+    show&&
+    <Box>
+    <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
+      <Navbar.Section className={classes.header}>
+        <Group position="apart">
+        {classes.navbar!=='mantine-kx242s'?<img onClick={()=>{addshow()}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo_dark.png'/>:<img src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo.png'/>}
+        <ImCross onClick={()=>{addshow()}}/>
+        </Group>
+      </Navbar.Section>
+
+      <Navbar.Section grow className={classes.links} component={ScrollArea}>
+        <div className={classes.linksInner}>{links}</div>
+      </Navbar.Section>
+
+      <Navbar.Section className={classes.footer}>
+        <UserButton
+          image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+          name="Ann Nullpointer"
+          email="anullpointer@yahoo.com"
+        />
+      </Navbar.Section>
+    </Navbar></Box>
   );
 }
