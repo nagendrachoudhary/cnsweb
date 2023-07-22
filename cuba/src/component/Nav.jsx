@@ -132,9 +132,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function Navbar() {
+export function Navbar({show,addshow}) {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const [show,setshow]=useState(true)
   const { classess } = useStyles();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -150,20 +149,12 @@ export function Navbar() {
   function dropDown() {
     setDropDownLang(!DropDownLang);
   }
- function addshow(){
-  setshow(!show)
- }
-  return (
 
-    <Box  display={'flex'}>
-      <Box>
-      <NavbarNested show={show} addshow={addshow} />
-      </Box>
-      <Box height={60} h={'70px'} w={'100%'} px="md">
-        <Group id="Navbar" position="apart" sx={{ height: "100%" }}>
-          
+  return (
+      <Box height={60} id="Navbar" pos={'sticky'} style={{backgroundColor:classes.dropdownFooter!=="mantine-1959vk6"?'white':"#25262b"}}  top={0} h={'70px'} w={'100%'} px="md">
+        <Group  id="Navbar" position="apart" sx={{ height: "100%" }}>
           {!show?<Box>
-        {classes.dropdownFooter!=="mantine-1959vk6"?<img onClick={()=>{addshow()}} onMouseEnter={()=>{setshow(true)}} onMouseLeave={()=>{setshow(false)}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo.png'/>:<img onClick={()=>{addshow()}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo_dark.png'/>}
+        {classes.dropdownFooter!=="mantine-1959vk6"?<img onClick={()=>{addshow()}} onMouseEnter={()=>{addshow()}} onMouseLeave={()=>{addshow()}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo.png'/>:<img onClick={()=>{addshow()}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo_dark.png'/>}
           </Box>:<Box></Box>}
           <Group
             sx={{ height: "100%" }}
@@ -722,8 +713,6 @@ export function Navbar() {
             className={classes.hiddenDesktop}
           />
         </Group>
-        <Main/>
-      </Box>
       </Box>
   );
 }

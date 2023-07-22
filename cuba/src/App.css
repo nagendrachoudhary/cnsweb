@@ -51,7 +51,7 @@
 }
 .box{
   width: 40%;
-  max-width: 400PX;
+  /* max-width: 400PX; */
   background:linear-gradient(103.75deg, #33B1EE -13.9%, #7366ff);
   display: flex;
   border-radius: 15px;
@@ -85,10 +85,18 @@ color:#33B1EE;
   border-radius: 100%;
   position: absolute;
 }
-#Navbar{
+#Scrbutton{
+  width: 100%;
+  display: flex;
+  justify-content: end;
   position: sticky;
-  top: 0;
-  left: 0;
-  z-index: auto;
-  background-color: white;
+  bottom: 0;
+  
+}
+#chart{
+  position: relative;
+   z-index: 1;
+}
+#Navbar{
+  z-index: 5;
 }

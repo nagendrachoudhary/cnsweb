@@ -100,8 +100,8 @@ export function NavbarNested({show,addshow}) {
   console.log(classes.navbar);
   return (
     show&&
-    <Box>
-    <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
+    <Box pos={'sticky'} style={{zIndex:'10000'}}   top={70}>
+    <Navbar height={800} mah={window.innerHeight} pos={'absolute'} top={-70} width={{ sm: 300 }} p="md" className={classes.navbar}>
       <Navbar.Section className={classes.header}>
         <Group position="apart">
         {classes.navbar!=='mantine-kx242s'?<img onClick={()=>{addshow()}} src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo_dark.png'/>:<img src='https://admin.pixelstrap.com/cuba/assets/images/logo/logo.png'/>}
@@ -112,14 +112,7 @@ export function NavbarNested({show,addshow}) {
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
         <div className={classes.linksInner}>{links}</div>
       </Navbar.Section>
-
-      <Navbar.Section className={classes.footer}>
-        <UserButton
-          image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-          name="Ann Nullpointer"
-          email="anullpointer@yahoo.com"
-        />
-      </Navbar.Section>
-    </Navbar></Box>
+    </Navbar>
+    </Box>
   );
 }

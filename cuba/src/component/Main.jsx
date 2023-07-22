@@ -44,7 +44,7 @@ import {
 } from "react-icons/bs";
 import { GrMoney, GrReturn } from "react-icons/gr";
 import { Cell, ResponsiveContainer } from "recharts";
-import { PiHandCoinsBold } from "react-icons/pi";
+import { PiHandCoinsBold, PiKeyReturn, PiMoney } from "react-icons/pi";
 import {
   IconGitBranch,
   IconGitPullRequest,
@@ -205,7 +205,7 @@ export default function Main() {
   const bage=['SASS','E-Commerce','Crypto',"Project","NFT","+9"]
   const { classes } = useStyles();
   return (
-    <Box>
+    <Box id="chart">
       <Box mt={"30px"} display={"flex"}>
         <Box className="box" display={"flex"}>
           <Box display={"flex"}>
@@ -232,7 +232,7 @@ export default function Main() {
         </Box>
         <Box w={"100%"}>
           <Box display={"flex"} style={{ justifyContent: "space-evenly" }}>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -268,7 +268,7 @@ export default function Main() {
                 </Paper>
               </Box>
             </Box>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -283,7 +283,7 @@ export default function Main() {
                         mr={"40px"}
                         label={
                           <Center>
-                            <GrReturn size={30} color="red" />
+                            <PiKeyReturn size={30} color="Yellow" />
                           </Center>
                         }
                       />
@@ -304,7 +304,7 @@ export default function Main() {
                 </Paper>
               </Box>
             </Box>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -327,7 +327,7 @@ export default function Main() {
                         <LineChart width={100} height={100} data={data2}>
                           <CartesianGrid stroke="transparent" />
                           <Tooltip />
-                          <Line type="monotone" dataKey="PROFIT" />
+                          <Line dot={false} type="monotone" dataKey="PROFIT" />
                         </LineChart>
                       </ResponsiveContainer>
                     </Box>
@@ -341,7 +341,7 @@ export default function Main() {
             display={"flex"}
             w={"100%"}
             style={{ justifyContent: "space-evenly" }}>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -377,7 +377,7 @@ export default function Main() {
                 </Paper>
               </Box>
             </Box>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -392,7 +392,7 @@ export default function Main() {
                         mr={"40px"}
                         label={
                           <Center>
-                            <GrMoney size={30} color="green" />
+                            <PiMoney size={30} color="green" />
                           </Center>
                         }
                       />
@@ -413,7 +413,7 @@ export default function Main() {
                 </Paper>
               </Box>
             </Box>
-            <Box w={"250px"}>
+            <Box w={'30%'}>
               <Box>
                 <Paper withBorder radius="md" p="xs">
                   <Box
@@ -436,7 +436,7 @@ export default function Main() {
                         <LineChart width={100} height={100} data={data}>
                           <CartesianGrid stroke="transparent" />
                           <Tooltip />
-                          <Line type="monotone" dataKey="PROFIT" />
+                          <Line type="monotone" dot={false} dataKey="PROFIT" />
                         </LineChart>
                       </ResponsiveContainer>
                     </Box>
@@ -845,7 +845,7 @@ export default function Main() {
               <option style={{ border: "none" }}>Last month</option>
             </select>
           </Box>
-          <Box>
+          <Box >
             <ResponsiveContainer width="100%" height={400}>
               <ScatterChart
                 margin={{
@@ -855,8 +855,8 @@ export default function Main() {
                   left: 20,
                 }}>
                 <CartesianGrid />
-                <XAxis type="category" dataKey="x" unit="" />
-                <YAxis type="category" dataKey="y" name="" unit="" />
+                <XAxis type='number' dataKey='x' unit="" />
+                <YAxis type='number' dataKey="y" unit="" />
                 <Tooltip cursor={{ strokeDasharray: "3 3" }} />
                 <Scatter name="A school" data={data4} fill="#8884d8">
                   <Button>{data4[0].name}</Button>
